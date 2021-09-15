@@ -1,0 +1,15 @@
+﻿TenDV,DienTichSD,CPThue,SluongToiDa,KieuThue,DVType,TieuChuanPhong,MotaTienNghi,SoTang,DTHoBoi,DVMienPhi
+VL001,20,1000,10,Thang,1,Cao cap,Vip1,3,20,
+VL001,30,1501,21,Thang,1,Trung cap,Vip2,5,15,
+VL003,40,2002,32,Thang,1,Cao cap,Vip3,10,10,
+VL004,50,2503,43,Ngay,1,Ha cap,Vip4,15,5,
+HS005,60,3004,54,Thang,2,Trung cap,VipI,20,,
+HS006,16,3505,65,Thang,2,Cao cap,VipII,25,,
+HS007,12,4006,23,Nam,2,Ha cap,VipI,30,,
+HS008,14,4507,87,Thang,2,Trung cap,VipII,35,,
+HS009,12,5008,98,Ngay,2,Cao cap,VipI,40,,
+R0010,11,5509,109,Thang,3,,,,,Banh 
+R0011,10,6010,120,Thang,3,,,,,Tam
+R0012,9,6511,131,Nam,3,,,,,Massage
+R0013,8,7012,142,Thang,3,,,,,Boi
+R0014,7,7513,153,Ngay,3,,,,,Nhau
