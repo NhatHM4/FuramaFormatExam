@@ -16,7 +16,7 @@ public class Service {
 	public List<Services> readFile(){
 		List<Services> listServices = new ArrayList<Services>();
 		String line;
-		String path = "E:\\nhat\\Furama2\\furama.csv";
+		String path = "E:\\nhat\\Furama2\\src\\furamaa.csv";
 		try (BufferedReader bff = new BufferedReader(new FileReader(path))){
 			bff.readLine();
 			while ((line = bff.readLine()) != null) {

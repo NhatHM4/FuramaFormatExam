@@ -3,8 +3,10 @@ package Validate;
 import java.util.Calendar;
 import java.util.regex.Pattern;
 
+import Dao.CustomerDao;
 import Dao.ServiceDao;
 import Exception.DateException;
+import Exception.ExistedFullNameCustomerExpection;
 import Exception.InvalidEmailException;
 import Exception.InvalidNumberException;
 import Exception.PhoneNumberException;
@@ -95,5 +97,20 @@ public class ValidatorUtil {
 		} 
 		return true;
 	}
+
+	public static boolean containNameCustomer(String name) throws ExistedFullNameCustomerExpection {
+		CustomerDao customerDao = new CustomerDao();
+		if (customerDao.existsNameCustomer(name)) {
+			throw new ExistedFullNameCustomerExpection("Trung ho ten roi anh trai oi !!!");
+		}
+		return true;
+	}
 	
+	public static boolean containExitedTenDV(String tenDV) throws TenDVIsExistsExcpetion {
+		ServiceDao serDao = new ServiceDao();
+		if (serDao.containTenDV(tenDV)) {
+			return true;
+		} 
+		throw new TenDVIsExistsExcpetion("TenDV is not Existed");
+	}
 }

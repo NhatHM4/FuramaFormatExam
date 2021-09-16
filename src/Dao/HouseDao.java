@@ -9,9 +9,10 @@ import Entity.House;
 import utils.JdbcUtil;
 
 public class HouseDao {
+	private JdbcUtil jdbcUtil = new JdbcUtil();
 	public List<House> select() {
 		String sql = "select * from services where DVType = 2";
-		ResultSet rs = JdbcUtil.excuteQuery(sql);
+		ResultSet rs = jdbcUtil.excuteQuery(sql);
 		return getHouse(rs);
 	}
 
@@ -34,6 +35,14 @@ public class HouseDao {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}finally {
+			try {
+//				rs.getStatement().getConnection().close();
+//				rs.getStatement().close();
+				rs.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		return listHouse;
 	}

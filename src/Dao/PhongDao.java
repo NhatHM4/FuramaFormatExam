@@ -5,14 +5,15 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import Entity.House;
 import Entity.Phong;
 import utils.JdbcUtil;
 
 public class PhongDao {
-	public List<Phong> select(){
+	private JdbcUtil jdbcUtil = new JdbcUtil();
+
+	public List<Phong> select() {
 		String sql = "select * from services where DVType = 3";
-		ResultSet rs = JdbcUtil.excuteQuery(sql);
+		ResultSet rs = jdbcUtil.excuteQuery(sql);
 		return getPhong(rs);
 	}
 
@@ -31,8 +32,15 @@ public class PhongDao {
 				listPhong.add(room);
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally {
+			try {
+//				rs.getStatement().getConnection().close();
+//				rs.getStatement().close();
+				rs.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		return listPhong;
 	}

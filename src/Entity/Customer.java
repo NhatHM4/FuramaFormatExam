@@ -12,6 +12,7 @@ public class Customer {
 	private String LoaiKhach;
 	private String Diachi;
 	private Services dichvu;
+	private String tenDV;
 	
 	public Customer() {
 		// TODO Auto-generated constructor stub
@@ -55,6 +56,16 @@ public class Customer {
 		Diachi = sc.nextLine();
 	}
 	
+	
+	
+	public String getTenDV() {
+		return tenDV;
+	}
+
+	public void setTenDV(String tenDV) {
+		this.tenDV = tenDV;
+	}
+
 	public String getHoten() {
 		return hoten;
 	}

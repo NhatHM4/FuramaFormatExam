@@ -9,9 +9,10 @@ import Entity.Villa;
 import utils.JdbcUtil;
 
 public class VillaDao {
+	private JdbcUtil jdbcUtil = new JdbcUtil();
 	public List<Villa> select() {
 		String sql = "select * from services where DVType = 1";
-		ResultSet rs = JdbcUtil.excuteQuery(sql);
+		ResultSet rs = jdbcUtil.excuteQuery(sql);
 		return getVilla(rs);
 	}
 
@@ -33,8 +34,15 @@ public class VillaDao {
 				listVilla.add(vl);
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}finally {
+			try {
+				rs.close();
+//				rs.getStatement().close();
+//				rs.getStatement().getConnection().close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		return listVilla;
 	}

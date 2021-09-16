@@ -2,6 +2,7 @@ package Dao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Scanner;
 
 import Entity.House;
 import Entity.Phong;
@@ -10,10 +11,11 @@ import Entity.Villa;
 import utils.JdbcUtil;
 
 public class ServiceDao {
+	private JdbcUtil jdbcUtil = new JdbcUtil();
 	public void insert(Services ser) {
 		if (ser instanceof Villa) {
 			String sql = "insert into services(TenDV,DienTichSD,CPThue,SLuongToiDa,KieuThue,DVType,TieuChuanPhong,MoTaTienNghi,SoTang,DTHoBoi) values(?,?,?,?,?,?,?,?,?,?)";
-			JdbcUtil.excuteUpdate(sql, ser.getTenDV(),
+			jdbcUtil.excuteUpdate(sql, ser.getTenDV(),
 									   ser.getDtichSD(),
 									   ser.getChiPhi(),
 									   ser.getSoLuong(),
@@ -28,7 +30,7 @@ public class ServiceDao {
 		
 		if (ser instanceof House) {
 			String sql = "insert into services(TenDV,DienTichSD,CPThue,SLuongToiDa,KieuThue,DVType,TieuChuanPhong,MoTaTienNghi,SoTang) values(?,?,?,?,?,?,?,?,?)";
-			JdbcUtil.excuteUpdate(sql, ser.getTenDV(),
+			jdbcUtil.excuteUpdate(sql, ser.getTenDV(),
 									   ser.getDtichSD(),
 									   ser.getChiPhi(),
 									   ser.getSoLuong(),
@@ -42,7 +44,7 @@ public class ServiceDao {
 		
 		if (ser instanceof Phong) {
 			String sql = "insert into services(TenDV,DienTichSD,CPThue,SLuongToiDa,KieuThue,DVType,DVMIenPhi) values(?,?,?,?,?,?,?)";
-			JdbcUtil.excuteUpdate(sql, ser.getTenDV(),
+			jdbcUtil.excuteUpdate(sql, ser.getTenDV(),
 									   ser.getDtichSD(),
 									   ser.getChiPhi(),
 									   ser.getSoLuong(),
@@ -55,7 +57,7 @@ public class ServiceDao {
 
 	public boolean containTenDV(String tenDV) {
 		String sql = "select * from services where TenDV = ?";
-		ResultSet rs = JdbcUtil.excuteQuery(sql, tenDV);
+		ResultSet rs = jdbcUtil.excuteQuery(sql, tenDV);
 		try {
 			while(rs.next()) {
 				return true;
@@ -64,5 +66,15 @@ public class ServiceDao {
 			e.printStackTrace();
 		}
 		return false;
+	}
+	
+	public void update(String TenDV,String kieuThue) {
+		String sql = "update services set KieuThue = ? where TenDV = ?";
+		jdbcUtil.excuteUpdate(sql, kieuThue, TenDV);
+	}
+
+	public int  updateService(String tenDV, String kieuThue) {	
+		String sql = "update services set Kieuthue = ? where TenDV = ?";
+		return jdbcUtil.excuteUpdate(sql, kieuThue,tenDV);
 	}
 }
