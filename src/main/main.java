@@ -2,6 +2,8 @@ package main;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
 
@@ -35,9 +37,11 @@ public class main {
 //			// TODO Auto-generated catch block
 //			e.printStackTrace();
 //		}
-//		showFromDB();
+		showFromDB();
 //		addcustomer();
-		deleteCustomer();
+//		deleteCustomer();
+		
+		
 	}
 
 	private static void deleteCustomer() {
@@ -127,6 +131,7 @@ public class main {
 		listSer.addAll(villas);
 		listSer.addAll(houses);
 		listSer.addAll(phongs);
+		Collections.sort(listSer, new sort());
 		for (Services services : listSer) {
 			System.out.println(services.toString());
 		}
@@ -156,4 +161,49 @@ public class main {
 			System.out.println(services.toString());
 		}
 	}
+}
+// sap xep Villa > House > Room 
+// Villa sap săp theo dt ho boi > mo ta tien nghi
+// House so tang sap theo so tang> theo ten
+// room sap xep theo dv mien phi > dien tich su dung
+
+class sort implements Comparator<Services>{
+
+	@Override
+	public int compare(Services o1, Services o2) {
+		if (o1 instanceof Villa && o2 instanceof Villa) {
+			if (Float.compare(((Villa)o1).getDtichHoBoi(), ((Villa)o2).getDtichHoBoi()) == 0) {
+				return ((Villa)o1).getMota().compareTo(((Villa)o2).getMota());
+			}
+			return -Float.compare(((Villa)o1).getDtichHoBoi(), ((Villa)o2).getDtichHoBoi());
+		}
+		
+		if (o1 instanceof House && o2 instanceof House) {
+			if (Integer.compare(((House)o1).getSotang(), ((House)o2).getSotang()) == 0) {
+				return -((House)o1).getTenDV().compareTo(((House)o2).getTenDV());
+			}
+			return -Integer.compare(((House)o1).getSotang(), ((House)o2).getSotang());
+		}
+		
+		if (o1 instanceof Phong && o2 instanceof Phong) {
+			if (((Phong)o1).getDvFree().compareTo(((Phong)o2).getDvFree()) == 0) {
+				return -(Float.compare(Float.parseFloat(((Phong)o1).getDtichSD()), Float.parseFloat(((Phong)o2).getDtichSD())));
+			}
+			return ((Phong)o1).getDvFree().compareTo(((Phong)o2).getDvFree());
+		}
+		
+		if (o1 instanceof Phong && !(o2 instanceof Phong)) {
+			return -1;
+		}
+		
+		if (o1 instanceof House && !(o2 instanceof House)) {
+			return 1;
+		}
+		
+		if (o1 instanceof Villa && !(o2 instanceof Villa)) {
+			return 0;
+		}
+		return 0;
+	}
+	
 }

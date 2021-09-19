@@ -30,6 +30,7 @@ public class JdbcUtil {
 
 	public  int excuteUpdate(String sql, Object... args) {
 		PreparedStatement statement = null;
+		
 		try  {
 			statement = prepareStatment(sql, args);
 			return statement.executeUpdate();
@@ -43,18 +44,21 @@ public class JdbcUtil {
 				e.printStackTrace();
 			}
 		}
+		
 		return 0;
 	}
 
 	public ResultSet excuteQuery(String sql, Object...args) {
 		ResultSet rs = null;
 		PreparedStatement statement = null;
+		
 		try {
 			statement = prepareStatment(sql, args);
 			rs = statement.executeQuery();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} 
+		
 		return rs;
 	}
 }
